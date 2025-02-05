@@ -2,8 +2,6 @@ package com.api.pay.domain;
 
 import com.api.pay.enums.AccountType;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Data;
 import java.math.BigDecimal;
 
 @Entity
