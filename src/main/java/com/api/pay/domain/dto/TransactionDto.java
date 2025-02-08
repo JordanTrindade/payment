@@ -1,8 +1,8 @@
 package com.api.pay.domain.dto;
-
-import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Positive;
 
 import java.math.BigDecimal;
 
-public record TransactionDto(@NotBlank BigDecimal value,@NotBlank Long senderId,@NotBlank Long recieverId) {
+public record TransactionDto(@NotNull @Positive BigDecimal value, @NotNull Long senderId, @NotNull Long recieverId) {
 }
