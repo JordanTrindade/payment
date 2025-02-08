@@ -11,10 +11,6 @@ import java.util.List;
 
 @ControllerAdvice
 public class ExceptionHandlerController {
-    @ExceptionHandler(AccountDataAlreadyExistsException.class)
-    public ProblemDetail AccountDataAlreadyExistsException(AccountDataAlreadyExistsException accountDataAlreadyExistsException){
-       return accountDataAlreadyExistsException.toProblemDetail();
-    }
 
     @ExceptionHandler(PaymentExceptions.class)
     public ProblemDetail PaymentExceptions(PaymentExceptions paymentExceptions){
