@@ -18,7 +18,7 @@ public class NotificationClientService {
         this.noticationClient = noticationClient;
     }
 
-    public void SendNotification(Transaction transaction){
+    public void sendNotification(Transaction transaction){
         try {
             logger.info("Sending notification");
             ResponseEntity<Void> res = noticationClient.sendNotification(transaction);
