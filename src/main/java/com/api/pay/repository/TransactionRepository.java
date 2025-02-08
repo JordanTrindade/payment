@@ -1,6 +1,9 @@
 package com.api.pay.repository;
 
+import com.api.pay.domain.Transaction;
 import org.springframework.data.jpa.repository.JpaRepository;
 
-public interface TransactionRepository extends JpaRepository<Long, Long>{
+import java.util.UUID;
+
+public interface TransactionRepository extends JpaRepository<Transaction, UUID>{
 }
