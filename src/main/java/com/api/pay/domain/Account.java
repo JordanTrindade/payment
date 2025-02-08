@@ -41,6 +41,22 @@ public class Account {
         this.accountType = accountType;
     }
 
+    public boolean isMerchantAccount() {
+        return this.getAccountType().equals(AccountType.MERCHANT);
+    }
+
+    public boolean hasSufficientBalance(BigDecimal value) {
+        return this.getBalance().compareTo(value) >= 0;
+    }
+
+    public void debit(BigDecimal value){
+        this.balance = this.balance.subtract(value);
+    }
+
+    public void credit(BigDecimal value){
+        this.balance = this.balance.add(value);
+    }
+
     public Long getId() {
         return id;
     }
