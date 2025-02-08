@@ -13,7 +13,7 @@ public class AuthorizationClientService {
         this.authorizationClient = authorizationClient;
     }
 
-    private Boolean isAuthorized(Transaction transaction){
+    public Boolean isAuthorized(){
         var response = authorizationClient.isAuthorized();
         if(response.getStatusCode().isError()){
             throw new PaymentExceptions();
