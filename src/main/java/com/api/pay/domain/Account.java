@@ -45,8 +45,8 @@ public class Account {
         return this.getAccountType().equals(AccountType.MERCHANT);
     }
 
-    public boolean hasSufficientBalance(BigDecimal value) {
-        return this.getBalance().compareTo(value) >= 0;
+    public boolean hasNotSufficientBalance(BigDecimal value) {
+        return this.getBalance().compareTo(value) < 0;
     }
 
     public void debit(BigDecimal value){
