@@ -27,7 +27,7 @@ public class Transaction {
     // 🔥 Construtor sem argumentos (obrigatório para o JPA)
     public Transaction() {}
 
-    public Transaction(Account reciever, Account sender, BigDecimal value) {
+    public Transaction(Account sender, Account reciever, BigDecimal value) {
         this.reciever = reciever;
         this.sender = sender;
         this.amount = value;
