@@ -11,4 +11,18 @@ public class PaymentExceptions extends RuntimeException{
 
         return problemDetail;
     }
+
+    public static class transactionNotAuthorized extends PaymentExceptions {
+        public transactionNotAuthorized() {
+        }
+
+        @Override
+        public ProblemDetail toProblemDetail() {
+            ProblemDetail problemDetail =  ProblemDetail.forStatus(HttpStatus.UNPROCESSABLE_ENTITY);
+            problemDetail.setTitle("Transaction not authorized");
+            problemDetail.setDetail("Authorization service not authorized");
+
+            return problemDetail;
+        }
+    }
 }
