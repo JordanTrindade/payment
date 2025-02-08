@@ -18,7 +18,7 @@ public class AuthorizationClientService {
         if(response.getStatusCode().isError()){
             throw new PaymentExceptions();
         }
-        return response.getBody().success();
+        return response.getBody().Authorized();
     }
 
 }
