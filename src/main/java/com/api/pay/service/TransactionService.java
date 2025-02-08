@@ -1,21 +1,23 @@
 package com.api.pay.service;
 
-import com.api.pay.client.AuthorizationClient;
 import com.api.pay.domain.Account;
 import com.api.pay.domain.Transaction;
-import com.api.pay.enums.AccountType;
+import com.api.pay.domain.dto.TransactionDto;
 import com.api.pay.repository.AccountRepository;
 import org.springframework.stereotype.Service;
 
-import java.util.Objects;
+import java.math.BigDecimal;
 
 @Service
 public class TransactionService {
     private final AccountRepository accountRepository;
+    private final AuthorizationClientService authorizationClientService;
+    private final NotificationClientService notificationClientService;
 
-
-    public TransactionService(AccountRepository accountRepository, AuthorizationClient authorizationClient) {
+    public TransactionService(AccountRepository accountRepository, AuthorizationClientService authorizationClientService, NotificationClientService notificationClientService) {
         this.accountRepository = accountRepository;
+        this.authorizationClientService = authorizationClientService;
+        this.notificationClientService = notificationClientService;
     }
 
     //receber o pedido
@@ -23,24 +25,27 @@ public class TransactionService {
             //validar autorizador
     //realizar transferencia
 
-    public void transaction(Transaction transaction){
-
-    }
-
-    public Boolean validAccount(Long senderId,Long recieverId){
-        Account sender =  accountRepository.findById(senderId).orElse(null);
-        Account reciever =  accountRepository.findById(recieverId).orElse(null);
-
-        //valida se as contas existem
-        if(Objects.isNull(reciever) || Objects.isNull(sender)){
-            return false;
-        }
+    public Transaction validTransfer(TransactionDto transactionDto){
+        Account sender =  accountRepository.findById(transactionDto.senderId()).orElse(null);
+        Account reciever =  accountRepository.findById(transactionDto.recieverId()).orElse(null);
+        BigDecimal value = transactionDto.value();
 
         //valida se o sender pode realizar transferencia
-        if(sender.getAccountType().equals(AccountType.MERCHANT)){
-            return false;
-        }
+        if (!sender.isMerchantAccount())System.out.println("Account not merchant");;
+        //valida saldo da carteira
+        if (!sender.hasSufficientBalance(value)) System.out.println("Account have not balance");;
 
-        return true;
+        if(!authorizationClientService.isAuthorized())System.out.println("Authorized client is out");
+
+        sender.debit(value);
+        reciever.credit(value);
+
+        accountRepository.save(sender);
+        accountRepository.save(reciever);
+
+        return new Transaction(sender,reciever, value);
     }
+
+
+
 }
