@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 @FeignClient(
+        name = "NoticationClient",
         url = "${https://run.mocky.io/v3/e197981e-2fec-4223-b8ef-b20646ff1a21}"
 )
 public interface NoticationClient {
