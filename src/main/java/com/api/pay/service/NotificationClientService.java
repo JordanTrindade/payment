@@ -6,7 +6,9 @@ import com.api.pay.exceptions.PaymentExceptions;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Service;
 
+@Service
 public class NotificationClientService {
 
     private final NoticationClient noticationClient;
