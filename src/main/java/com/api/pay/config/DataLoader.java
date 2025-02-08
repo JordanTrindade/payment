@@ -20,8 +20,9 @@ public class DataLoader implements CommandLineRunner {
     @Override
     public void run(String... args) throws Exception {
 
-        AccountDTO account = new AccountDTO("jordan","110.538.576-08","jordan@gmial.com","1234", AccountType.CLIENT);
-        accountRepository.save(account.toAccount());
+        Account account = new Account("jordan","110.538.576-08","jordan@gmial.com","1234", AccountType.CLIENT);
+        account.credit(BigDecimal.valueOf(200));
+        accountRepository.save(account);
 
     }
 }
